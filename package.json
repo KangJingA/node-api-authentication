@@ -1,0 +1,22 @@
+{
+  "name": "api-authentication",
+  "version": "1.0.0",
+  "description": "learning authentication",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KangJingA/node-api-authentication.git"
+  },
+  "author": "KangjingA",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KangJingA/node-api-authentication/issues"
+  },
+  "homepage": "https://github.com/KangJingA/node-api-authentication#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
