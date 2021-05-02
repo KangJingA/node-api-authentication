@@ -6,6 +6,8 @@ const User = require("../model/User");
 const { registerValidation, loginValidation } = require("../validation");
 // hashing
 const bcrypt = require("bcryptjs");
+//jwt
+const jwt = require("jsonwebtoken");
 
 router.post("/register", async (req, res) => {
   // validate data before creating user
@@ -42,7 +44,7 @@ router.post("/login", async(req,res) => {
   if (error) return res.status(400).send(error.details[0].message);
 
   const user = await User.findOne({ email: req.body.email }); // understand how to destructure
-  console.log(user);
+  // console.log(user);
   if (!user) return res.status(400).send("Email does not exist");
 
   // check password is correct
@@ -50,7 +52,15 @@ router.post("/login", async(req,res) => {
   const validPass = await bcrypt.compare(req.body.password, user.password)
   if (!validPass) return res.status(400).send("Invalid password")
   
-  res.send("log in success");
+  // create and assign token since logged in is successful
+  // first argument -> data for the token
+  // second argument -> secret for the token, lives in .env
+  const token = jwt.sign({_id:user._id}, process.env.secret );
+  
+  // add token to the header
+  res.header('auth-token',token).send(token);
+
+  //res.send("log in success");
 })
 
 
