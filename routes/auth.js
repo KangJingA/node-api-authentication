@@ -32,7 +32,7 @@ router.post("/register", async (req, res) => {
   // store user
   try {
     const savedUser = await user.save();
-    res.send({ user: user._id });
+    res.send({ user: user._id }); // id specific to the user in database 
   } catch (error) {
     // set response status to 400, send error
     res.status(400).send(error);
@@ -53,7 +53,8 @@ router.post("/login", async(req,res) => {
   if (!validPass) return res.status(400).send("Invalid password")
   
   // create and assign token since logged in is successful
-  // first argument -> data for the token
+  // first argument -> data for the token to contain
+  // pass the user id so that we can reference to it when looking for data
   // second argument -> secret for the token, lives in .env
   const token = jwt.sign({_id:user._id}, process.env.secret );
   

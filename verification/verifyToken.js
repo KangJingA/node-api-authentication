@@ -9,7 +9,8 @@ const auth = (req,res,next) => {
 
     try {
         const verified = jwt.verify(token, process.env.secret);
-        req.user = verified;
+        console.log(verified);
+        req.user = verified; // now, you can find data related to this user from this
         next();
     } catch(err){
         res.status(400).send('Invalid Token');
