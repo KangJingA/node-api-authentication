@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 
 // import routes
 const authRoute = require("./routes/auth");
+const postRoute = require("./routes/posts");
 
 // grab data from .env
 dotenv.config();
@@ -23,6 +24,7 @@ app.use(express.json());
 
 // route middleware
 app.use("/api/user", authRoute);
+app.use('/api/posts', postRoute);
 
 app.get("/", (req, res) => {
     res.send("this is working");
