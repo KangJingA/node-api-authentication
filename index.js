@@ -12,23 +12,26 @@ dotenv.config();
 
 // connect to DB
 const uri = process.env.uri;
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, () =>
-  console.log("connected to DB")
+mongoose.connect(
+  uri,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  () => {
+    console.log("connected to DB");
+  }
 );
 
 // middleware
 
 // only for PUT and POST requests
-// to recognize the incoming Request Object as a JSON Object 
+// to recognize the incoming Request Object as a JSON Object
 app.use(express.json());
 
 // route middleware
 app.use("/api/user", authRoute);
-app.use('/api/posts', postRoute);
+app.use("/api/posts", postRoute);
 
 app.get("/", (req, res) => {
-    res.send("this is working");
-  });
-  
+  res.send("this is working");
+});
 
 app.listen(3000, () => console.log("server is working"));
